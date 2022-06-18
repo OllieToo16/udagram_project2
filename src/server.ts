@@ -18,12 +18,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
 
 
-  app.get('/filteredimage', async (req, res) => {
-    let {image_url } =req.query;
+  app.get( "/filteredimage/", 
+    async (req:express.Request, res:express.Response) =>  {
     
+    let {image_url } =req.query;
     const Image = await filterImageFromURL(image_url);
 
-    res.status(200).sendFile(`${Image}`,function (){
+    res.status(201).sendFile(`${Image}`,function (){
      
     deleteLocalFiles([`${Image}`])
     });
